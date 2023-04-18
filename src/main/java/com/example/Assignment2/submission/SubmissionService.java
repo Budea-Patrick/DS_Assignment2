@@ -25,8 +25,8 @@ public class SubmissionService {
 
         List<Submission> submissions = submissionRepository.findAll();
 
-        for(Submission sub : submissions) {
-            if(assignmentId == sub.getAssignment().getId() && studentId == sub.getStudent().getId()) {
+        for (Submission sub : submissions) {
+            if (assignmentId == sub.getAssignment().getId() && studentId == sub.getStudent().getId()) {
                 found = true;
                 break;
             }
@@ -61,20 +61,19 @@ public class SubmissionService {
     }
 
 
-
     public Pair<String, HttpStatus> create(SubmissionDTO submissionDTO) {
         Submission submission = toEntity(submissionDTO);
 
         Assignment assignment = assignmentRepository.findAssignmentById(submissionDTO.getAssignment());
         Student student = studentRepository.findStudentById(submissionDTO.getStudent());
 
-        if(assignment == null) {
+        if (assignment == null) {
             return Pair.of("Assignment does not exist", HttpStatus.BAD_REQUEST);
         }
-        if(student == null) {
+        if (student == null) {
             return Pair.of("Student does not exist", HttpStatus.BAD_REQUEST);
         }
-        if(checkIfAssignmentExists(submissionDTO.getAssignment(), submissionDTO.getStudent())){
+        if (checkIfAssignmentExists(submissionDTO.getAssignment(), submissionDTO.getStudent())) {
             return Pair.of("Assignment already exists", HttpStatus.BAD_REQUEST);
         }
 
@@ -84,7 +83,7 @@ public class SubmissionService {
 
     public Pair<String, HttpStatus> grade(SubmissionDTO submissionDTO) {
         Submission submission = submissionRepository.findSubmissionById(submissionDTO.getId());
-        if(submission == null) {
+        if (submission == null) {
             return Pair.of("Submission does not exist", HttpStatus.BAD_REQUEST);
         }
 

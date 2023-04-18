@@ -54,7 +54,7 @@ public class TeacherController {
     public ResponseEntity<String> createStudent(@RequestBody StudentDTO studentDTO) {
         Pair<String, HttpStatus> pair;
         Teacher teacher = teacherService.findByUserName(studentDTO.getRequester());
-        if(!teacherService.isTeacherLoggedIn(teacher)) {
+        if (!teacherService.isTeacherLoggedIn(teacher)) {
             pair = teacherService.invalidLogin();
         } else {
             pair = studentService.create(studentDTO);
@@ -66,7 +66,7 @@ public class TeacherController {
     public ResponseEntity<String> deleteStudent(@RequestBody StudentDTO studentDTO) {
         Pair<String, HttpStatus> pair;
         Teacher teacher = teacherService.findByUserName(studentDTO.getRequester());
-        if(!teacherService.isTeacherLoggedIn(teacher)) {
+        if (!teacherService.isTeacherLoggedIn(teacher)) {
             pair = teacherService.invalidLogin();
         } else {
             pair = studentService.delete(studentDTO);
@@ -78,7 +78,7 @@ public class TeacherController {
     public ResponseEntity<String> updateStudent(@RequestBody StudentDTO studentDTO) {
         Pair<String, HttpStatus> pair;
         Teacher teacher = teacherService.findByUserName(studentDTO.getRequester());
-        if(!teacherService.isTeacherLoggedIn(teacher)) {
+        if (!teacherService.isTeacherLoggedIn(teacher)) {
             pair = teacherService.invalidLogin();
         } else {
             pair = studentService.update(studentDTO);
@@ -90,7 +90,7 @@ public class TeacherController {
     public ResponseEntity<?> findStudent(@RequestBody StudentDTO studentDTO) {
         Pair<?, HttpStatus> pair;
         Teacher teacher = teacherService.findByUserName(studentDTO.getRequester());
-        if(!teacherService.isTeacherLoggedIn(teacher)) {
+        if (!teacherService.isTeacherLoggedIn(teacher)) {
             pair = teacherService.invalidLogin();
         } else {
             pair = studentService.findStudent(studentDTO);
@@ -102,7 +102,7 @@ public class TeacherController {
     public ResponseEntity<?> findAllStudents(@RequestBody TeacherDTO teacherDTO) {
         Pair<?, HttpStatus> pair;
         Teacher teacher = teacherService.findByUserName(teacherDTO.getUsername());
-        if(!teacherService.isTeacherLoggedIn(teacher)) {
+        if (!teacherService.isTeacherLoggedIn(teacher)) {
             pair = teacherService.invalidLogin();
         } else {
             pair = studentService.findAllStudents();
@@ -114,7 +114,7 @@ public class TeacherController {
     public ResponseEntity<String> createLaboratory(@RequestBody LaboratoryDTO laboratoryDTO) {
         Pair<String, HttpStatus> pair;
         Teacher teacher = teacherService.findByUserName(laboratoryDTO.getRequester());
-        if(!teacherService.isTeacherLoggedIn(teacher)) {
+        if (!teacherService.isTeacherLoggedIn(teacher)) {
             pair = teacherService.invalidLogin();
         } else {
             pair = laboratoryService.create(laboratoryDTO);
@@ -126,7 +126,7 @@ public class TeacherController {
     public ResponseEntity<String> deleteLaboratory(@RequestBody LaboratoryDTO laboratoryDTO) {
         Pair<String, HttpStatus> pair;
         Teacher teacher = teacherService.findByUserName(laboratoryDTO.getRequester());
-        if(!teacherService.isTeacherLoggedIn(teacher)) {
+        if (!teacherService.isTeacherLoggedIn(teacher)) {
             pair = teacherService.invalidLogin();
         } else {
             pair = laboratoryService.delete(laboratoryDTO);
@@ -138,7 +138,7 @@ public class TeacherController {
     public ResponseEntity<String> updateLaboratory(@RequestBody LaboratoryDTO laboratoryDTO) {
         Pair<String, HttpStatus> pair;
         Teacher teacher = teacherService.findByUserName(laboratoryDTO.getRequester());
-        if(!teacherService.isTeacherLoggedIn(teacher)) {
+        if (!teacherService.isTeacherLoggedIn(teacher)) {
             pair = teacherService.invalidLogin();
         } else {
             pair = laboratoryService.update(laboratoryDTO);
@@ -150,7 +150,7 @@ public class TeacherController {
     public ResponseEntity<?> findLaboratory(@RequestBody LaboratoryDTO laboratoryDTO) {
         Pair<?, HttpStatus> pair;
         Teacher teacher = teacherService.findByUserName(laboratoryDTO.getRequester());
-        if(!teacherService.isTeacherLoggedIn(teacher)) {
+        if (!teacherService.isTeacherLoggedIn(teacher)) {
             pair = teacherService.invalidLogin();
         } else {
             pair = laboratoryService.findLaboratory(laboratoryDTO);
@@ -162,7 +162,7 @@ public class TeacherController {
     public ResponseEntity<?> findAllLaboratories(@RequestBody TeacherDTO teacherDTO) {
         Pair<?, HttpStatus> pair;
         Teacher teacher = teacherService.findByUserName(teacherDTO.getUsername());
-        if(!teacherService.isTeacherLoggedIn(teacher)) {
+        if (!teacherService.isTeacherLoggedIn(teacher)) {
             pair = teacherService.invalidLogin();
         } else {
             pair = laboratoryService.findAllLaboratories();
@@ -174,7 +174,7 @@ public class TeacherController {
     public ResponseEntity<String> createAttendance(@RequestBody AttendanceDTO attendanceDTO) {
         Pair<String, HttpStatus> pair;
         Teacher teacher = teacherService.findByUserName(attendanceDTO.getRequester());
-        if(!teacherService.isTeacherLoggedIn(teacher)) {
+        if (!teacherService.isTeacherLoggedIn(teacher)) {
             pair = teacherService.invalidLogin();
         } else {
             pair = attendanceService.create(attendanceDTO);
@@ -186,7 +186,7 @@ public class TeacherController {
     public ResponseEntity<String> deleteAttendance(@RequestBody AttendanceDTO attendanceDTO) {
         Pair<String, HttpStatus> pair;
         Teacher teacher = teacherService.findByUserName(attendanceDTO.getRequester());
-        if(!teacherService.isTeacherLoggedIn(teacher)) {
+        if (!teacherService.isTeacherLoggedIn(teacher)) {
             pair = teacherService.invalidLogin();
         } else {
             pair = attendanceService.delete(attendanceDTO);
@@ -198,7 +198,7 @@ public class TeacherController {
     public ResponseEntity<String> updateAttendance(@RequestBody AttendanceDTO attendanceDTO) {
         Pair<String, HttpStatus> pair;
         Teacher teacher = teacherService.findByUserName(attendanceDTO.getRequester());
-        if(!teacherService.isTeacherLoggedIn(teacher)) {
+        if (!teacherService.isTeacherLoggedIn(teacher)) {
             pair = teacherService.invalidLogin();
         } else {
             pair = attendanceService.update(attendanceDTO);
@@ -210,7 +210,7 @@ public class TeacherController {
     public ResponseEntity<?> findAttendance(@RequestBody AttendanceDTO attendanceDTO) {
         Pair<?, HttpStatus> pair;
         Teacher teacher = teacherService.findByUserName(attendanceDTO.getRequester());
-        if(!teacherService.isTeacherLoggedIn(teacher)) {
+        if (!teacherService.isTeacherLoggedIn(teacher)) {
             pair = teacherService.invalidLogin();
         } else {
             pair = attendanceService.find(attendanceDTO);
@@ -222,7 +222,7 @@ public class TeacherController {
     public ResponseEntity<?> findAllAttendances(@RequestBody TeacherDTO teacherDTO) {
         Pair<?, HttpStatus> pair;
         Teacher teacher = teacherService.findByUserName(teacherDTO.getUsername());
-        if(!teacherService.isTeacherLoggedIn(teacher)) {
+        if (!teacherService.isTeacherLoggedIn(teacher)) {
             pair = teacherService.invalidLogin();
         } else {
             pair = attendanceService.findAll();
@@ -234,7 +234,7 @@ public class TeacherController {
     public ResponseEntity<String> createAssignment(@RequestBody AssignmentDTO assignmentDTO) {
         Pair<String, HttpStatus> pair;
         Teacher teacher = teacherService.findByUserName(assignmentDTO.getRequester());
-        if(!teacherService.isTeacherLoggedIn(teacher)) {
+        if (!teacherService.isTeacherLoggedIn(teacher)) {
             pair = teacherService.invalidLogin();
         } else {
             pair = assignmentService.create(assignmentDTO);
@@ -246,7 +246,7 @@ public class TeacherController {
     public ResponseEntity<String> deleteAssignment(@RequestBody AssignmentDTO assignmentDTO) {
         Pair<String, HttpStatus> pair;
         Teacher teacher = teacherService.findByUserName(assignmentDTO.getRequester());
-        if(!teacherService.isTeacherLoggedIn(teacher)) {
+        if (!teacherService.isTeacherLoggedIn(teacher)) {
             pair = teacherService.invalidLogin();
         } else {
             pair = assignmentService.delete(assignmentDTO);
@@ -258,7 +258,7 @@ public class TeacherController {
     public ResponseEntity<String> updateAssignment(@RequestBody AssignmentDTO assignmentDTO) {
         Pair<String, HttpStatus> pair;
         Teacher teacher = teacherService.findByUserName(assignmentDTO.getRequester());
-        if(!teacherService.isTeacherLoggedIn(teacher)) {
+        if (!teacherService.isTeacherLoggedIn(teacher)) {
             pair = teacherService.invalidLogin();
         } else {
             pair = assignmentService.update(assignmentDTO);
@@ -270,7 +270,7 @@ public class TeacherController {
     public ResponseEntity<?> findAssignment(@RequestBody AssignmentDTO assignmentDTO) {
         Pair<?, HttpStatus> pair;
         Teacher teacher = teacherService.findByUserName(assignmentDTO.getRequester());
-        if(!teacherService.isTeacherLoggedIn(teacher)) {
+        if (!teacherService.isTeacherLoggedIn(teacher)) {
             pair = teacherService.invalidLogin();
         } else {
             pair = assignmentService.findAssignment(assignmentDTO);
@@ -282,7 +282,7 @@ public class TeacherController {
     public ResponseEntity<?> findAllAssignments(@RequestBody TeacherDTO teacherDTO) {
         Pair<?, HttpStatus> pair;
         Teacher teacher = teacherService.findByUserName(teacherDTO.getUsername());
-        if(!teacherService.isTeacherLoggedIn(teacher)) {
+        if (!teacherService.isTeacherLoggedIn(teacher)) {
             pair = teacherService.invalidLogin();
         } else {
             pair = assignmentService.findAllAssignments();
@@ -294,7 +294,7 @@ public class TeacherController {
     public ResponseEntity<String> findAllAssignments(@RequestBody SubmissionDTO submissionDTO) {
         Pair<String, HttpStatus> pair;
         Teacher teacher = teacherService.findByUserName(submissionDTO.getRequester());
-        if(!teacherService.isTeacherLoggedIn(teacher)) {
+        if (!teacherService.isTeacherLoggedIn(teacher)) {
             pair = teacherService.invalidLogin();
         } else {
             pair = submissionService.grade(submissionDTO);

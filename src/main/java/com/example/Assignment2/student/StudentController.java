@@ -44,7 +44,7 @@ public class StudentController {
     public ResponseEntity<?> findAllLabs(@RequestBody StudentDTO studentDTO) {
         Pair<?, HttpStatus> pair;
         Student student = studentService.findByUserName(studentDTO.getUsername());
-        if(!studentService.isStudentLoggedIn(student)) {
+        if (!studentService.isStudentLoggedIn(student)) {
             pair = studentService.invalidLogin();
         } else {
             pair = studentService.findAllLabs();
@@ -55,7 +55,8 @@ public class StudentController {
 
     @GetMapping("/assignments")
     public ResponseEntity<?> findAssignmentByLab(@RequestBody LaboratoryDTO laboratoryDTO) {
-        Pair<?, HttpStatus> pair = studentService.findAssignmentsByLab(laboratoryDTO);;
+        Pair<?, HttpStatus> pair = studentService.findAssignmentsByLab(laboratoryDTO);
+        ;
         return new ResponseEntity<>(pair.getFirst(), pair.getSecond());
     }
 
@@ -63,7 +64,7 @@ public class StudentController {
     public ResponseEntity<?> createSubmission(@RequestBody SubmissionDTO submissionDTO) {
         Pair<?, HttpStatus> pair;
         Student student = studentService.findByUserName(submissionDTO.getRequester());
-        if(!studentService.isStudentLoggedIn(student)) {
+        if (!studentService.isStudentLoggedIn(student)) {
             pair = studentService.invalidLogin();
         } else {
             pair = submissionService.create(submissionDTO);

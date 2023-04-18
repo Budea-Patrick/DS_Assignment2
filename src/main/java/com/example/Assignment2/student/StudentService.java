@@ -8,8 +8,6 @@ import com.example.Assignment2.groupTeam.GroupTeamRepository;
 import com.example.Assignment2.laboratory.Laboratory;
 import com.example.Assignment2.laboratory.LaboratoryDTO;
 import com.example.Assignment2.laboratory.LaboratoryRepository;
-import com.example.Assignment2.teacher.Teacher;
-import com.example.Assignment2.teacher.TeacherDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.util.Pair;
 import org.springframework.http.HttpStatus;
@@ -19,18 +17,16 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class StudentService {
 
+    private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     private final StudentRepository studentRepository;
     private final GroupTeamRepository groupTeamRepository;
     private final LaboratoryRepository laboratoryRepository;
     private final AssignmentRepository assignmentRepository;
-
-    private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
     private boolean checkIfStudentExists(String firstName, String lastName) {
         Student foundStudent = studentRepository.findStudentByFirstNameAndLastName(firstName, lastName);
@@ -40,8 +36,8 @@ public class StudentService {
     private String generateToken() {
         StringBuilder builder = new StringBuilder();
 
-        for(int i = 0; i < 128; i++) {
-            int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
+        for (int i = 0; i < 128; i++) {
+            int character = (int) (Math.random() * ALPHA_NUMERIC_STRING.length());
             builder.append(ALPHA_NUMERIC_STRING.charAt(character));
         }
         return builder.toString();
@@ -100,7 +96,7 @@ public class StudentService {
         Student student = toEntity(studentDTO);
         student.setToken(generateToken());
 
-        if(checkIfStudentExists(student.getFirstName(), student.getLastName())) {
+        if (checkIfStudentExists(student.getFirstName(), student.getLastName())) {
             return Pair.of("Student already exists", HttpStatus.BAD_REQUEST);
         }
 
@@ -113,7 +109,7 @@ public class StudentService {
         Optional<Student> student = studentRepository.findById(studentDTO.getId());
         Student foundStudent;
         foundStudent = student.orElse(null);
-        if(foundStudent == null) {
+        if (foundStudent == null) {
             return Pair.of("Student does not exist", HttpStatus.BAD_REQUEST);
         }
 
@@ -125,10 +121,10 @@ public class StudentService {
         Optional<Student> student = studentRepository.findById(studentDTO.getId());
         Student foundStudent;
         foundStudent = student.orElse(null);
-        if(foundStudent == null) {
+        if (foundStudent == null) {
             return Pair.of("Student does not exist", HttpStatus.BAD_REQUEST);
         }
-        if(groupTeamRepository.findById(studentDTO.getGroupTeam()).isEmpty()) {
+        if (groupTeamRepository.findById(studentDTO.getGroupTeam()).isEmpty()) {
             return Pair.of("Group does not exist", HttpStatus.BAD_REQUEST);
         }
 
@@ -144,7 +140,7 @@ public class StudentService {
 
     public Pair<?, HttpStatus> findStudent(StudentDTO studentDTO) {
         Student student = studentRepository.findStudentByFirstNameAndLastName(studentDTO.getFirstName(), studentDTO.getLastName());
-        if(student == null) {
+        if (student == null) {
             return Pair.of("Student does not exist", HttpStatus.BAD_REQUEST);
         }
 
@@ -154,7 +150,7 @@ public class StudentService {
     public Pair<?, HttpStatus> findAllStudents() {
         List<Student> studentList = studentRepository.findAll();
         List<StudentDTO> studentDTOS = new ArrayList<>();
-        for(Student student : studentList) {
+        for (Student student : studentList) {
             studentDTOS.add(fromEntity(student));
         }
         return Pair.of(studentDTOS, HttpStatus.OK);
@@ -162,7 +158,7 @@ public class StudentService {
 
     public Pair<String, HttpStatus> register(StudentDTO studentDTO) {
         Student student = studentRepository.findStudentByToken(studentDTO.getToken());
-        if(student == null) {
+        if (student == null) {
             return Pair.of("Token is incorrect", HttpStatus.BAD_REQUEST);
         }
 
@@ -222,7 +218,7 @@ public class StudentService {
     public Pair<?, HttpStatus> findAllLabs() {
         List<Laboratory> laboratoryList = laboratoryRepository.findAll();
         List<LaboratoryDTO> laboratoryDTOS = new ArrayList<>();
-        for(Laboratory laboratory : laboratoryList) {
+        for (Laboratory laboratory : laboratoryList) {
             laboratoryDTOS.add(fromEntityLab(laboratory));
         }
         return Pair.of(laboratoryDTOS, HttpStatus.OK);
@@ -230,13 +226,13 @@ public class StudentService {
 
     public Pair<?, HttpStatus> findAssignmentsByLab(LaboratoryDTO laboratoryDTO) {
         Laboratory laboratory = laboratoryRepository.findLaboratoryByNr(laboratoryDTO.getNr());
-        if(laboratory == null) {
+        if (laboratory == null) {
             return Pair.of("Laboratory does not exist", HttpStatus.BAD_REQUEST);
         }
 
         List<Assignment> assignmentList = assignmentRepository.findAllByLabAssignment(laboratory);
         List<AssignmentDTO> assignmentDTOS = new ArrayList<>();
-        for(Assignment assignment : assignmentList) {
+        for (Assignment assignment : assignmentList) {
             assignmentDTOS.add(fromEntityAssignment(assignment));
         }
         return Pair.of(assignmentDTOS, HttpStatus.OK);

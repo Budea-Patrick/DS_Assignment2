@@ -1,8 +1,5 @@
 package com.example.Assignment2.laboratory;
 
-import com.example.Assignment2.attendance.Attendance;
-import com.example.Assignment2.student.Student;
-import com.example.Assignment2.student.StudentDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.util.Pair;
 import org.springframework.http.HttpStatus;
@@ -10,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,8 +18,8 @@ public class LaboratoryService {
         boolean found = false;
 
         List<Laboratory> labs = laboratoryRepository.findAll();
-        for(Laboratory lab : labs) {
-            if(nr == lab.getNr()) {
+        for (Laboratory lab : labs) {
+            if (nr == lab.getNr()) {
                 found = true;
                 break;
             }
@@ -51,7 +47,7 @@ public class LaboratoryService {
 
     public Pair<String, HttpStatus> create(LaboratoryDTO laboratoryDTO) {
         Laboratory laboratory = toEntity(laboratoryDTO);
-        if(checkIfLaboratoryExists(laboratory.getNr())) {
+        if (checkIfLaboratoryExists(laboratory.getNr())) {
             return Pair.of("Laboratory already exists", HttpStatus.BAD_REQUEST);
         }
         laboratoryRepository.save(laboratory);
@@ -59,10 +55,10 @@ public class LaboratoryService {
     }
 
     public Pair<String, HttpStatus> delete(LaboratoryDTO laboratoryDTO) {
-       Laboratory laboratory = laboratoryRepository.findLaboratoryById(laboratoryDTO.getId());
-       if(laboratory == null) {
-           return Pair.of("Laboratory does not exist", HttpStatus.BAD_REQUEST);
-       }
+        Laboratory laboratory = laboratoryRepository.findLaboratoryById(laboratoryDTO.getId());
+        if (laboratory == null) {
+            return Pair.of("Laboratory does not exist", HttpStatus.BAD_REQUEST);
+        }
 
         laboratoryRepository.delete(laboratory);
         return Pair.of("Laboratory deleted successfully", HttpStatus.OK);
@@ -70,7 +66,7 @@ public class LaboratoryService {
 
     public Pair<String, HttpStatus> update(LaboratoryDTO laboratoryDTO) {
         Laboratory laboratory = laboratoryRepository.findLaboratoryById(laboratoryDTO.getId());
-        if(laboratory == null) {
+        if (laboratory == null) {
             return Pair.of("Laboratory does not exist", HttpStatus.BAD_REQUEST);
         }
 
@@ -85,7 +81,7 @@ public class LaboratoryService {
 
     public Pair<?, HttpStatus> findLaboratory(LaboratoryDTO laboratoryDTO) {
         Laboratory laboratory = laboratoryRepository.findLaboratoryById(laboratoryDTO.getId());
-        if(laboratory == null) {
+        if (laboratory == null) {
             return Pair.of("Laboratory does not exist", HttpStatus.BAD_REQUEST);
         }
 
@@ -95,7 +91,7 @@ public class LaboratoryService {
     public Pair<?, HttpStatus> findAllLaboratories() {
         List<Laboratory> laboratoryList = laboratoryRepository.findAll();
         List<LaboratoryDTO> laboratoryDTOS = new ArrayList<>();
-        for(Laboratory laboratory : laboratoryList) {
+        for (Laboratory laboratory : laboratoryList) {
             laboratoryDTOS.add(fromEntity(laboratory));
         }
         return Pair.of(laboratoryDTOS, HttpStatus.OK);

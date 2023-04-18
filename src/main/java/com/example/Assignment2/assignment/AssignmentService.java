@@ -1,9 +1,7 @@
 package com.example.Assignment2.assignment;
 
 import com.example.Assignment2.laboratory.Laboratory;
-import com.example.Assignment2.laboratory.LaboratoryDTO;
 import com.example.Assignment2.laboratory.LaboratoryRepository;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.util.Pair;
 import org.springframework.http.HttpStatus;
@@ -44,8 +42,8 @@ public class AssignmentService {
 
         List<Assignment> assignments = assignmentRepository.findAll();
 
-        for(Assignment as : assignments) {
-            if(id == as.getLabAssignment().getId()) {
+        for (Assignment as : assignments) {
+            if (id == as.getLabAssignment().getId()) {
                 found = true;
                 break;
             }
@@ -57,11 +55,11 @@ public class AssignmentService {
         Assignment assignment = toEntity(assignmentDTO);
         Laboratory laboratory = laboratoryRepository.findLaboratoryById(assignmentDTO.getLabId());
 
-        if(checkIfAssignmentExists(assignmentDTO.getId())) {
+        if (checkIfAssignmentExists(assignmentDTO.getId())) {
             return Pair.of("Assignment already exists", HttpStatus.BAD_REQUEST);
         }
 
-        if(laboratory == null) {
+        if (laboratory == null) {
             return Pair.of("Laboratory does not exist", HttpStatus.BAD_REQUEST);
         }
 
@@ -71,7 +69,7 @@ public class AssignmentService {
 
     public Pair<String, HttpStatus> delete(AssignmentDTO assignmentDTO) {
         Assignment assignment = assignmentRepository.findAssignmentById(assignmentDTO.getId());
-        if(assignment == null) {
+        if (assignment == null) {
             return Pair.of("Assignment does not exist", HttpStatus.BAD_REQUEST);
         }
 
@@ -83,11 +81,11 @@ public class AssignmentService {
         Assignment assignment = assignmentRepository.findAssignmentById(assignmentDTO.getId());
         Laboratory laboratory = laboratoryRepository.findLaboratoryById(assignmentDTO.getLabId());
 
-        if(assignment == null) {
+        if (assignment == null) {
             return Pair.of("Assignment does not exist", HttpStatus.BAD_REQUEST);
         }
 
-        if(laboratory == null) {
+        if (laboratory == null) {
             return Pair.of("Laboratory does not exist", HttpStatus.BAD_REQUEST);
         }
 
@@ -102,7 +100,7 @@ public class AssignmentService {
 
     public Pair<?, HttpStatus> findAssignment(AssignmentDTO assignmentDTO) {
         Assignment assignment = assignmentRepository.findAssignmentById(assignmentDTO.getId());
-        if(assignment == null) {
+        if (assignment == null) {
             return Pair.of("Assignment does not exist", HttpStatus.BAD_REQUEST);
         }
 
@@ -112,7 +110,7 @@ public class AssignmentService {
     public Pair<?, HttpStatus> findAllAssignments() {
         List<Assignment> assignmentList = assignmentRepository.findAll();
         List<AssignmentDTO> assignmentDTOS = new ArrayList<>();
-        for(Assignment assignment : assignmentList) {
+        for (Assignment assignment : assignmentList) {
             assignmentDTOS.add(fromEntity(assignment));
         }
         return Pair.of(assignmentDTOS, HttpStatus.OK);
